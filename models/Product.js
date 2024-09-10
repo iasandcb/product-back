@@ -22,6 +22,7 @@ const ProductSchema = new mongoose.Schema(
   }
 );
 
-const Product = mongoose.model('Product', ProductSchema); // Product 모델 -> products 몽고 콜렉션에 대응
+// JS의 Product 모델 -> 몽고디비의 products 콜렉션에 대응
+const Product = mongoose.model('Product', ProductSchema); 
 
 export default Product;

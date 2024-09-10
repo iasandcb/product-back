@@ -39,15 +39,15 @@ function asyncHandler(handler) {
 }
 
 app.get('/products', asyncHandler(async (req, res) => {
-  // TODO: name, description 를 몽고디비로
+  // TODO: name, description 포함 검색을 몽고디비로
+  // 오프셋 기반 페이지네이션을 구현하세요.
+  // offset(이미 본 갯수), limit(앞으로 보고싶은 갯수)
   const sort = req.query.sort;
   const offset = Number(req.query.offset);
   const limit = Number(req.query.limit);
-  console.log('limit', limit);
   const sortOption = sort === 'recent' ? { createdAt: 'desc' } : {};
-  const products = await Product.find().sort(sortOption).limit(limit);
+  const products = await Product.find().sort(sortOption).skip(offset).limit(limit);
   res.send(products);
 }));
 
-app.listen(process.env.PORT, () => console.log("Server on"));
-console.log('Hi');
+app.listen(process.env.PORT, () => console.log("Booted up"));
